@@ -1,0 +1,16 @@
+1. Working on a basic version that only prints an array of 9x9 size.
+2. Beginning adding coordinate labels to the array, and introducing new characters besides just spaces and underscores.
+3. Creating a driver file (Pvz.java) and moving the array there from Array.java.
+4. Adding extra functionality of being able to add and remove characters from the array by the coordinate.
+5. Allowing characters to be moved within the array from coordinate to coordinate.
+6. Creating classes Plant() and Zombie(), possibly under the umbrella superclass Character().
+7. Giving the Character classes a set of attributes, including coordinates, names, and certain powers, possibly through a constructor.
+8. Being able to instantiate the Character classes such that their coordinates are used to determine their positions on the board.
+9. Creating functionality for the movement, creating, and firing of bullets, as well as movement of zombies.
+10. Allowing attributes like Health to be manipulated by the positions of bullets, as well as attributes like Suns to be manipulated by the presence of suns on the board, which should appear if zombies are killed.
+11. Creating a mechanism for dying/reincarnation of characters.
+12. Creating a mechanism for buying/selling plants.
+13. Designing a sequence of play steps by which a given turn in the game would run, and by which turns would transition.
+14. Allowing messages to be displayed to the user based on what happens in the game, and with certain attributes.
+15. Allowing the user to interact and control the flow of the game.
+16. Finishing touches, such as a description at the beginning.
