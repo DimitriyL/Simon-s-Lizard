@@ -1,3 +1,8 @@
+Simon's Lizard: Dimitriy Leksanov, Kelly Wang, Maggie Xia
+APCS1 pd1
+todo.txt: work flow summary
+2017-01-10
+
 1. Working on a basic version that only prints an array of 9x9 size.
 2. Beginning adding coordinate labels to the array, and introducing new characters besides just spaces and underscores.
 3. Creating a driver file (Pvz.java) and moving the array there from Array.java.
