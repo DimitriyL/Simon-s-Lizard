@@ -3,11 +3,12 @@ import cs1.Keyboard;
 public class Woo {
     
     public static String[][] board = new String[9][9];//size of playing grid
+    public static String plantsDir = "------------------------------\n\t~Plants Directory~\n------------------------------\nP=\n\tPea Pod: 5 suns (10HP, 5ATK)\nS=\n\tShroom: 3 suns (10HP, 0ATK)\nO=\n\tPotato: 10 suns (25HP, 0ATK)\nC=\n\tCorn Cobbler: 8 suns (10HP, 7ATK)\nT=\n\tCactus: 8 suns (8HP, 8ATK)\nW=\n\tWaterm'Cannon: 15 suns (15HP, 20ATK)";
     
     //empty grid
     public static String ArrayToString ( String [][] arr ) {
-	labeling(board);
-	chars(board);
+	//labeling(board);
+	//chars(board);
 	String retstr = "";
 	for ( int s = 0; s < arr.length ; s++ ) {
 	    for ( int x = 0 ; x < arr[s].length ; x++ ) {
@@ -37,43 +38,79 @@ public class Woo {
 	    String a = "" + s;
 	    arr[s][0] = a;
 	}
+
+	//arr[0][0] = " \nx \ny";
     }
 
     public static void chars ( String [][] arr ) {
+	System.out.println("Type in x coordinate:");
 	int x = Keyboard.readInt();
+	System.out.println("Type in y coordinate:");
 	int y = Keyboard.readInt();
+	System.out.println(plantsDir);
+	System.out.println("Choose a plant:");
 	arr[y][x] = Keyboard.readWord();
+	//
     }
 
+    public void turn () {
+	//return true;
+	
+	System.out.println ( "Would you like to add a plant? \ny = yes \nn = no" );
+	boolean go;
+	String input = Keyboard.readWord();
+	if ( input.equals("y") ) {
+	    go = true;
+	}
+	else { go = false; }
+	while ( go == true ) { 
+	    //labeling(board);
+	    chars(board);
+	    // System.out.println(r);
+	    System.out.println( ArrayToString(board) );
+	    // System.out.println("Suns = " + suns);
+	   
+	    System.out.println ( "Would you like to add a plant? \ny = yes \nn = no" );
+	    //boolean go;
+	    input = Keyboard.readWord();
+	    if ( input.equals("y") ) {
+		go = true;
+	    }
+	    else { go = false; }
+	}
+
+    }
+
+   
+
     public static void main ( String[] args ) {
-        
+        Woo kelly = new Woo();
 	int suns = 15;
 	
 	String r = "==============================";
 	System.out.println(r);
 	System.out.println("\tWelcome to PvZ!");
 	System.out.println(r);
-	
-	String plantsDir = "------------------------------\n\t~Plants Directory~\n------------------------------\nP=\n\tPea Pod: 5 suns (10HP, 5ATK)\nS=\n\tShroom: 3 suns (10HP, 0ATK)\nO=\n\tPotato: 10 suns (25HP, 0ATK)\nC=\n\tCorn Cobbler: 8 suns (10HP, 7ATK)\nT=\n\tCactus: 8 suns (8HP, 8ATK)\nW=\n\tWaterm'Cannon: 15 suns (15HP, 20ATK)";
-	System.out.println(plantsDir);
-	System.out.println(r);
-	
+
 	System.out.println("Suns = " + suns);
 	System.out.println(r);
 	
-	System.out.println("To plant, type in the coordinates and the plant key.");
-	System.out.println("For example, if you would like to plant a Pea Pod \nat the coordinates (3, 2), simply type into the terminal:\n\t3\n\t>press the enter key<\n\t2\n\t>press the enter key<\n\tP\n\t>press the enter key<");
+	kelly.labeling(board);
+	System.out.println( kelly.ArrayToString(board) );
+
 	System.out.println(r);
 	
 	System.out.println("Now let's begin the game!");
-	Woo kelly = new Woo();
-	System.out.println("Type in x and y coordinates and choose a plant:");
-	//kelly.chars(board);
+	
+	kelly.labeling(board);
+	kelly.chars(board);
+
 	System.out.println(r);
 	
 	System.out.println( kelly.ArrayToString(board) );
 	System.out.println("Suns = " + suns);
 	System.out.println(r);
 	
+	kelly.turn();
     }
 }
