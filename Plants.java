@@ -4,5 +4,7 @@ public class Plants extends Character{
     protected int cost;
     protected int freq;
 
-    public abstract void shoot();
+    public static String shoot ( int freq ) {
+	
+    } 
 }

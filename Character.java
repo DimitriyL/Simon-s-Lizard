@@ -1,4 +1,4 @@
-public abstract class Character {
+public class Character {
 
     protected char symbol;
     protected int health;
@@ -7,7 +7,11 @@ public abstract class Character {
     protected int yCor;
     protected String name;
 
-    public abstract int adjustHealth();
-    public abstract String die();
-
+    public int adjustHealth();
+    
+    public String die ( ) {
+	String s = "";
+	return s;
+    }
+    
 }

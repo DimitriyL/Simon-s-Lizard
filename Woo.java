@@ -81,7 +81,12 @@ public class Woo {
 
     }
 
-   
+    public static void shoot ( Plants c ) {
+	String s = c.bullet;
+	board[ c.xCor + 1 ][ c.yCor ] = s; 
+    } 
+
+  
 
     public static void main ( String[] args ) {
         Woo kelly = new Woo();
