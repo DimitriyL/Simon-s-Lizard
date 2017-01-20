@@ -1,9 +1,12 @@
 import cs1.Keyboard;
 
+
 public class Woo {
     
     public static String[][] board = new String[9][9];//size of playing grid
+    public static Plants[] plantList = new Plants[25];
     public static String plantsDir = "------------------------------\n\t~Plants Directory~\n------------------------------\nP=\n\tPea Pod: 5 suns (10HP, 5ATK)\nS=\n\tShroom: 3 suns (10HP, 0ATK)\nO=\n\tPotato: 10 suns (25HP, 0ATK)\nC=\n\tCorn Cobbler: 8 suns (10HP, 7ATK)\nT=\n\tCactus: 8 suns (8HP, 8ATK)\nW=\n\tWaterm'Cannon: 15 suns (15HP, 20ATK)";
+    public static int plantCount = 0;
     
     //empty grid
     public static String ArrayToString ( String [][] arr ) {
@@ -50,6 +53,16 @@ public class Woo {
 	System.out.println(plantsDir);
 	System.out.println("Choose a plant:");
 	arr[y][x] = Keyboard.readWord();
+	Plants p = new Plants("-", 1, x, y);
+	plantList[plantCount] = p;
+	plantCount++;
+	System.out.println(p.shoot());
+	moveBullets(arr);
+	for(Plants l: plantList){
+	    shoot(p);
+	}
+
+	//System.out.println(plantList);
 	//
     }
 
@@ -70,6 +83,10 @@ public class Woo {
 	    System.out.println( ArrayToString(board) );
 	    // System.out.println("Suns = " + suns);
 	   
+	    /*for(Plants p: plantList){
+		p.shoot();
+		}*/
+
 	    System.out.println ( "Would you like to add a plant? \ny = yes \nn = no" );
 	    //boolean go;
 	    input = Keyboard.readWord();
@@ -83,10 +100,19 @@ public class Woo {
 
     public static void shoot ( Plants c ) {
 	String s = c.bullet;
-	board[ c.xCor + 1 ][ c.yCor ] = s; 
+	board[ c.xCor ][ c.yCor + 1 ] = s; 
     } 
 
-  
+    public static void moveBullets ( String[][] arr ){
+	for(int i = 0; i < arr.length; i++){
+	    for(int j = arr.length - 1; j >= 0; j--){
+		if (arr[i][j].equals("-")){
+		    arr[i][j + 1] = arr[i][j];
+		    arr[i][j] = "";
+		}
+	    }
+	}
+    }
 
     public static void main ( String[] args ) {
         Woo kelly = new Woo();

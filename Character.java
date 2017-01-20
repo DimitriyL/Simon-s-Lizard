@@ -7,7 +7,10 @@ public class Character {
     protected int yCor;
     protected String name;
 
-    public int adjustHealth();
+    public int adjustHealth(int amount){
+	health -= amount;
+	return health;
+    }
     
     public String die ( ) {
 	String s = "";
