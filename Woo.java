@@ -3,13 +3,13 @@ import cs1.Keyboard;
 
 public class Woo {
     
-    public static String[][] board = new String[9][9];//size of playing grid
+    public static Object[][] board = new Object[9][9];//size of playing grid
     public static Plants[] plantList = new Plants[25];
     public static String plantsDir = "------------------------------\n\t~Plants Directory~\n------------------------------\nP=\n\tPea Pod: 5 suns (10HP, 5ATK)\nS=\n\tShroom: 3 suns (10HP, 0ATK)\nO=\n\tPotato: 10 suns (25HP, 0ATK)\nC=\n\tCorn Cobbler: 8 suns (10HP, 7ATK)\nT=\n\tCactus: 8 suns (8HP, 8ATK)\nW=\n\tWaterm'Cannon: 15 suns (15HP, 20ATK)";
     public static int plantCount = 0;
     
     //empty grid
-    public static String ArrayToString ( String [][] arr ) {
+    public static String ArrayToString ( Object [][] arr ) {
 	//labeling(board);
 	//chars(board);
 	String retstr = "";
@@ -24,7 +24,7 @@ public class Woo {
     }
     
     
-    public static void labeling ( String [][] arr ) {
+    public static void labeling ( Object [][] arr ) {
         
 	for ( int s = 0; s < arr.length ; s++ ) {//changes grid from being all "null" to space
 	    for ( int x = 0 ; x < arr[s].length ; x++ ) {
@@ -45,7 +45,7 @@ public class Woo {
 	//arr[0][0] = " \nx \ny";
     }
 
-    public static void chars ( String [][] arr ) {
+    public static void chars ( Object [][] arr ) {
 	System.out.println("Type in x coordinate:");
 	int x = Keyboard.readInt();
 	System.out.println("Type in y coordinate:");
@@ -103,12 +103,12 @@ public class Woo {
 	board[ c.xCor ][ c.yCor + 1 ] = s; 
     } 
 
-    public static void moveBullets ( String[][] arr ){
-	for(int i = 0; i < arr.length; i++){
-	    for(int j = arr.length - 1; j >= 0; j--){
-		if (arr[i][j].equals("-")){
-		    arr[i][j + 1] = arr[i][j];
-		    arr[i][j] = "";
+    public static void moveBullets ( Object [][] arr ){
+	for ( int r = 0; r < arr.length; r++ ) {
+	    for ( int c = arr[r].length - 2; c > 0; c-- ) {
+		if ( arr[r][c].equals("-")){
+		    arr[r][c + 1] = "-";
+		    arr[r][c] = "";
 		}
 	    }
 	}
