@@ -1,6 +1,6 @@
 public class Character {
 
-    protected String symbol;
+    protected char symbol;
     protected int health;
     protected int atk;
     protected int xCor;
