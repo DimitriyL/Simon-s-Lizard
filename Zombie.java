@@ -38,7 +38,7 @@ public class Zombie extends Character
 		    arr[r][j] = ((String)arr[r][j]).replace("Z", "");
 		    arr[r][j] = ((String)arr[r][j]).replace(" ", "");		    
 		    arr[r][j - 1] = "Z";
-		    arr[r][j - 1] = ((String)arr[r][j - 1]).replace(" ", "");		    
+		    arr[r][j - 1] = ((String)arr[r][j - 1]).replace(" ", "");	    
 		    zArr[j][r].super.xCor -= 1;
 		    Zombie mock = zArr[j - 1][r];
 		    zArr[j - 1][r] = zArr[j][r];
@@ -53,3 +53,4 @@ public class Zombie extends Character
 }
     //public abstract String dropSun();
     
+
