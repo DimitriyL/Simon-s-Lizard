@@ -11,10 +11,4 @@ public class Character {
 	health -= amount;
 	return health;
     }
-    
-    public String die ( ) {
-	String s = "";
-	return s;
-    }
-    
 }
