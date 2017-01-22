@@ -12,6 +12,7 @@ public class Woo {
     public static int plantCount = 0;
     public static int suns;
     public static boolean keepGoing = false;
+    public static int life = 50;
 
     public Woo(){
 	suns = 15;
@@ -167,13 +168,13 @@ public class Woo {
 		}
 	    }
 	    
-	    move(board, zomBoard);
 
-	    trackPos();
+
+	    //to include /trackPos();
 	    hit(board, zomBoard, plaBoard);
-
+	    move(board, zomBoard);
 	    System.out.println( ArrayToString(board) );
-	    System.out.println(ArrayToClass(board));
+	    //to include/System.out.println(ArrayToClass(board));
 	    // System.out.println("Suns = " + suns);
 	   
 	    
@@ -188,6 +189,7 @@ public class Woo {
 	    cleanup(board);
 
 	    System.out.println("Suns: " + suns);
+            System.out.println("Life: " + life);
 
 	    System.out.println("Stop playing?\n(y/n)");
 	    input = Keyboard.readWord();
@@ -224,7 +226,7 @@ public class Woo {
 		    //   System.out.println(arr[r][c]);
 		    arr[r][c] = ((String)arr[r][c]).replace("-", "");
 		    arr[r][c] = ((String)arr[r][c]).replace(" ", "");
-		    System.out.println(("Class of the bullet's slot: " + arr[r][c]).getClass());
+		    //to include /System.out.println(("Class of the bullet's slot: " + arr[r][c]).getClass());
 		    arr[r][c + 1] += "-";
 		    arr[r][c + 1] = ((String)arr[r][c + 1]).replace(" ", "");
 		    //		    System.out.println(arr[r][c + 1]);
@@ -292,7 +294,7 @@ public class Woo {
                     arr[r][j] = ((String)arr[r][j]).replace("Z", "");
                     arr[r][j] = ((String)arr[r][j]).replace(" ", "");        
 
-                    arr[r][j - 1] = "Z";
+                    arr[r][j - 1] += "Z";
                     arr[r][j - 1] = ((String)arr[r][j - 1]).replace(" ", "");  
                     //zArr[j][r].(super.xCor) -= 1;
                     Zombie mock = zArr[j - 1][r];
@@ -307,6 +309,12 @@ public class Woo {
 	for(int i = 0; i < 9; i++){
 	    if (arr[i][8] instanceof String){
 		arr[i][8] = ((String)arr[i][8]).replace("-", " "); 
+	    }
+	}
+	for(int m = 0; m < 9; m++){
+	    if ((arr[m][1] instanceof String) && (((String)arr[m][1]).contains("Z"))){
+		arr[m][1] = ((String)arr[m][1]).replace("Z", " "); 
+		life -= 10; 
 	    }
 	}
 	for(int a = 1; a < arr.length; a++){
@@ -333,6 +341,7 @@ public class Woo {
 	System.out.println(r);
 
 	System.out.println("Suns = " + suns);
+	System.out.println("Here is today's game board: ");
 	System.out.println(r);
 	
 	kelly.labeling(board);
@@ -349,6 +358,7 @@ public class Woo {
 	
 	//	System.out.println( kelly.ArrayToString(board) );
 	System.out.println("Suns = " + suns);
+	System.out.println("Life = " + life);
 	System.out.println(r);
 	
 	//	boolean go = false;
