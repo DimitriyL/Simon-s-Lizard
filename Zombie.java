@@ -53,4 +53,3 @@ public class Zombie extends Character
 }
     //public abstract String dropSun();
     
-

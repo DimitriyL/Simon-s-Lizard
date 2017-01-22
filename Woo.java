@@ -8,7 +8,7 @@ public class Woo {
     public static Object[][] board = new Object[9][9];//size of playing grid
     public static Zombie[][] zomBoard = new Zombie[9][9];
     public static Plants[][] plaBoard = new Plants[9][9];
-    public static String plantsDir = "------------------------------\n\t~Plants Directory~\n------------------------------\nP=\n\tPea Pod: 5 suns (10HP, 5ATK)\nS=\n\tShroom: 3 suns (10HP, 0ATK)\nO=\n\tPotato: 10 suns (25HP, 0ATK)\nC=\n\tCorn Cobbler: 8 suns (10HP, 7ATK)\nT=\n\tCactus: 8 suns (8HP, 8ATK)\nW=\n\tWaterm'Cannon: 15 suns (15HP, 20ATK)";
+    public static String plantsDir = "------------------------------\n\t~Plants Directory~\n------------------------------\nP=\n\tPea Pod (P): 5 suns (10HP, 5ATK)\nS=\n\tShroom (S): 3 suns (6HP, 4 ATK)\nO=\n\tPotato (T): 10 suns (25HP, 0ATK)\nC=\n\tCorn Cobbler (B): 8 suns (10HP, 7ATK)\nT=\n\tCactus (C): 7 suns (8HP, 8ATK)\nW=\n\tWaterm'Cannon (W): 15 suns (15HP, 20ATK)";
     public static int plantCount = 0;
     public static int suns;
     public static boolean keepGoing = false;
@@ -68,17 +68,17 @@ public class Woo {
     }
 
     public void chars ( Object [][] arr ) {
+    System.out.println(plantsDir);
+	System.out.println("Choose a plant:");
+	String type = Keyboard.readWord();
 	System.out.println("Type in x coordinate:");
 	int x = Keyboard.readInt();
 	System.out.println("Type in y coordinate:");
 	int y = Keyboard.readInt();
-	System.out.println(plantsDir);
-	System.out.println("Choose a plant:");
-	String type = Keyboard.readWord();
 
 	if(!(arr[y][x] instanceof Plants)){
 	    Plants p = new Plants("-", 5, x, y, type);
-	    arr[y][x] = p;
+	    arr[y][x] = p.symbol;
 	    plaBoard[x][y] = p;
 	}
 	//System.out.println(p.shoot());
