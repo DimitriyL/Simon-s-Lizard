@@ -5,7 +5,7 @@ public class Plants extends Character{
     protected int cost;
     protected int freq;
 
-    public Plants(String bullet1, int freq1, int xCor1, int yCor1, String type1){
+    public Plants ( String bullet1, int freq1, int xCor1, int yCor1, String type1 ) {
 	bullet = bullet1;
 	freq = freq1;
 	super.xCor = xCor1;
