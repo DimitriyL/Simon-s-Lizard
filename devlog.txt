@@ -28,23 +28,32 @@ Flesh out each category whenever necessary, appropriate.
 OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Proper indices in 2-D arrays.
+Incorporating String objects and Character objects in a 2-D array.
+Writing classes and subclasses to most efficiently utilize methods.
+Creating different types of plants and zombies without writing separate subclasses for each of them.
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 How to represent instances of other classes as characteristics of a driver file (such as in representing Zombies and Plants on the board within class Pvz()).
-Going from class Array() to class Pvz().
+Going from class Woo() to class Pvz().
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Be very careful in distinguishing between an array and the string representing said array.
+There is a difference between Foo.woo() and woo(Foo)!
+Spelling mistakes are the bane of our existence.
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The String with the array had tabs and newlines added for aesthetic purposes.
+Every bullets now look like "-" instead of being unique to the plant that shoots it.
+Instead of having a String[][] array, we changed it to an Object[][] array.
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The MVP method.
+Communication is key.
+It is important that the 2-D array encompasses both Characters and Strings, so we had to make it an Object array.
 ||||||||||||||||||||||||||||||||||||||||||
 
 
@@ -66,9 +75,27 @@ Dimitriy :: Distinguished between methods to form an array itself, and methods t
 Maggie :: Came up with a way to populate the String array with spaces before adding labels, tabs, and newlines to rows and columns.
 ==============================================================
 
+2017-01-13
+--------------------------------------------------------------
+Changed the name of the repo from Team-Simon-s-Lizard to Simon-s- Lizard.
+Changed the name of the driver file from Array.java to Woo.java
+==============================================================
+
+2017-01-16
+--------------------------------------------------------------
+Wrote Character.java, Plants.java, and Zombie.java class files.
+Further development of the driver file.
+Figured out how to include user input.
+==============================================================
+
 2017-01-19
 --------------------------------------------------------------
 Kelly :: Caught on to the intricacy of the x-y coordinate orientations of an actual 2-D array as opposed to a game board, as we would want a player to view it.
 Dimitriy :: Added extra functionality that allows Plants placed onto the board to create bullets, and allows the bullets to continue moving.
 Maggie :: Continued work on the flowchart and also created two different "shoot" methods, one in the Plants() class and one in the driver file.
+==============================================================
+
+2017-01-20
+--------------------------------------------------------------
+Fine-tuning
 ==============================================================
