@@ -509,7 +509,7 @@ public class Woo {
 		
 	String r = "==============================";
 	System.out.println(r);
-	System.out.println("\tWelcome to PvZ!");
+	System.out.println("\tWelcome to Plants vs Zombies!");
 	System.out.println(r);
 
 	System.out.println("Suns = " + suns);
