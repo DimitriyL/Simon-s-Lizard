@@ -1,4 +1,5 @@
 import java.util.Random;
+//was planned but ultimately went unused
 
 import cs1.Keyboard;
 
@@ -9,13 +10,12 @@ public class Woo {
     public static Object[][] board = new Object[9][9];//size of playing grid
     /*
       while the game board consists of mostly Strings, zomBoard and plaBoard keep track of the coordinates, x and y, of specifically Plants and Zombies
-    */
+     */
     public static Zombie[][] zomBoard = new Zombie[9][9];
     public static Plants[][] plaBoard = new Plants[9][9];
-    
-    public static String plantsDir = "------------------------------\n\t~Plants Directory~\n------------------------------\nP=\n\tPea Pod: 5 suns (10HP, 5ATK)\nS=\n\tShroom: 3 suns (10HP, 0ATK)\nO=\n\tPotato: 10 suns (25HP, 4ATK)\nC=\n\tCorn Cobbler: 8 suns (10HP, 7ATK)\nT=\n\tCactus: 8 suns (8HP, 8ATK)\nW=\n\tWaterm'Cannon: 15 suns (15HP, 20ATK))";
-    
-    //public static String plantsDir = "------------------------------\n\t~Plants Directory~\n------------------------------\nP=\n\tProper Plant: 3 suns, 5ATK\nThis is the only plant";
+    //pay this no mind
+    //    public static String plantsDir = "------------------------------\n\t~Plants Directory~\n------------------------------\nP=\n\tPea Pod: 5 suns (10HP, 5ATK)\nS=\n\tShroom: 3 suns (10HP, 0ATK)\nO=\n\tPotato: 10 suns (25HP, 0ATK)\nC=\n\tCorn Cobbler: 8 suns (10HP, 7ATK)\nT=\n\tCactus: 8 suns (8HP, 8ATK)\nW=\n\tWaterm'Cannon: 15 suns (15HP, 20ATK)";
+    public static String plantsDir = "------------------------------\n\t~Plants Directory~\n------------------------------\nP=\n\tProper Plant: 3 suns, 5ATK\nThis is the only plant";
     //public static int plantCount = 0;
     //suns are currency, used for predisposing a plant up the surface of the board
     public static int suns;
@@ -32,6 +32,8 @@ public class Woo {
     
     //empty grid
     public static String ArrayToString ( Object [][] arr ) {
+	//labeling(board);
+	//chars(board);
 	String retstr = "";
 	for ( int s = 0; s < arr.length ; s++ ) {
 	    for ( int x = 0 ; x < arr[s].length ; x++ ) {
@@ -51,7 +53,7 @@ public class Woo {
       pre: the game board is due to be represented by an array
       post: the class, whether String, Plant, or Zombie, of each element of the board is returned
       this was used as a diagnostic to show why certain methods did not work when areas of the array went from Plant to String
-    */
+     */
     public static String ArrayToClass(Object[][] arr){
 	String retstr = "";
 	for ( int s = 0; s < arr.length ; s++ ) {
@@ -68,7 +70,7 @@ public class Woo {
       static void labeling(Object[][] arr)
       pre: an array of empty Object slots
       post: the top and left edges are labeled 1-8 to display an 8x8 grid
-    */
+     */
     public static void labeling ( Object [][] arr ) {
         
 	for ( int s = 0; s < arr.length ; s++ ) {//changes grid from being all "null" to space
@@ -95,7 +97,7 @@ public class Woo {
       void chars (Object[][] arr)
       pre: a 2-d object array, in this case the game board, lacks any characters beyond edge markings
       post: a true travesty in method naming, chars draws user input to place a Plant at a specified spot on the game board.  The coordinates are then also registered in the plaBoard
-    */
+     */
     public void chars ( Object [][] arr ) {
 	int x;
 	int y;
@@ -105,55 +107,17 @@ public class Woo {
         System.out.println("Type in y coordinate:");
         y = Keyboard.readInt();
         System.out.println(plantsDir);
-        System.out.println("Choose a plant ( CaSe SeNsItIvE ):");
+        System.out.println("Choose a plant:");
         type = Keyboard.readWord();
+	System.out.println("I assume you chose P");
+
 	try{
 	    if((!(arr[y][x] instanceof Plants)) && ((x > 0) && (y > 0))){
-		if ( type.equals("P") && suns > 4) {
-		    Plants p = new Plants("-", 5, x, y, "P" );
-		    arr[y][x] = p;
-		    //the reversal of x and y here is for aestheric purposes but ultimately has only led to headaches
-		    plaBoard[x][y] = p;
-		    //registered accordingly; plaBoard is ultimately just a log of class instances, as many turn into Strings later within the game board
-		    suns -= 5;
-		    System.out.println("Suns are now at: " + suns);
-		}
-		else if ( type.equals("S") && suns > 2) {
-		    Plants s = new Plants("-", 0, x, y, "S" );
-		    arr[y][x] = s;
-		    plaBoard[x][y] = s;
-		    suns -= 3;
-		    System.out.println("Suns are now at: " + suns);
-		}
-		else if ( type.equals("C") && suns > 7 ) {
-		    Plants c = new Plants("-", 4, x, y, "C" );
-		    arr[y][x] = c;
-		    plaBoard[x][y] = c;
-		    suns -= 8;
-		    System.out.println("Suns are now at: " + suns);
-		}
-		else if ( type.equals("O") && suns > 9 ) {
-		    Plants o = new Plants("-", 7, x, y, "O" );
-		    arr[y][x] = o;
-		    plaBoard[x][y] = o;
-		    suns -= 10;
-		    System.out.println("Suns are now at: " + suns);
-		}
-		else if ( type.equals("T") && suns > 7) {
-		    Plants t = new Plants("-", 8, x, y, "T" );
-		    arr[y][x] = t;
-		    plaBoard[x][y] = t;
-		    suns -= 8;
-		    System.out.println("Suns are now at: " + suns);
-		}
-		else if ( type.equals("W") && suns > 14) {
-		    Plants w = new Plants("-", 20, x, y, "W" );
-		    arr[y][x] = w;
-		    plaBoard[x][y] = w;
-		    suns -= 15;
-		    System.out.println("Suns are now at: " + suns);
-		}
-		else { System.out.println("You can not purchase that plant!"); }
+		Plants p = new Plants("-", 5, x, y, "P");
+		arr[y][x] = p;
+		//the reversal of x and y here is for aestheric purposes but ultimately has only led to headaches
+		plaBoard[x][y] = p;
+		//registered accordingly; plaBoard is ultimately just a log of class instances, as many turn into Strings later within the game board
 	    }
 	    else if((x == 0) || (y == 0)){
 		System.out.println("That is not a space on the game board. Everyone knows that plants can't grow there!");
@@ -165,13 +129,28 @@ public class Woo {
 	catch(ArrayIndexOutOfBoundsException e){
 	    System.out.println("Because of your ridiculousness, you have forfeited your plant.");
 	}
+
+
+	//System.out.println(p.shoot());
+	//	moveBullets(arr);
+	/*      	for(int i = 0; i < arr.length; i++){
+	    for(int j = arr.length - 2; j >= 0; j--){
+		if(arr[i][j] instanceof Plants && (Math.random() * 10) < p.freq ){
+		    shoot((Plants) arr[i][j]);
+		}
+	    }
+	    }*/
+
+
+	//System.out.println(plantList);
+	//
     }
 
     /*
       void trackPos()
       pre: the plant and zombie-specific boards exist with the x- and y-coordinates of each character registered
       post: this outputs a list of values for diagnostic purposes that represent each of Characters on the board
-    */
+     */
     public void trackPos(){
 	System.out.println("Zombie Board:\n");
 	System.out.println(zomBoard);
@@ -206,7 +185,7 @@ public class Woo {
       pre: with all the boards and helper methods in place, this is the heart of the game
       post: first, all the bullets will move to their further locations.  Then, the user is given the option to add plants. After that, Zombies are created and new Plants may or may not fire their weapons.  Finally, any potential bullet hits are noted, and Zombies finally move.
       Now that I think of it, moveBullets and move should probably both be before the addition of Plants, as that is the step that has the least bearing on the current state of the board.  As well, the hit calculator could probably be run twice, once after each of the moves.
-    */
+     */
     public void turn () {
 	//return true;
 	//bullets move one spot to the right
@@ -227,6 +206,8 @@ public class Woo {
 	    //allows the user to add as many plants as they choose
 	    if ( input.equals("y") ) {
 		go = true;
+		suns -= 3;
+		System.out.println("Suns are now at: " + suns);
 	    }
 	    else{
 		go = false; 
@@ -235,10 +216,12 @@ public class Woo {
 		chars(board);
 		System.out.println ( "Would you like to add a plant? \ny = yes \nn = no" );
 		//boolean go;
-		if ( suns >= 3 ) {
+		if(suns >= 3){
 		    input = Keyboard.readWord();
 		    if ( input.equals("y") ) {
 			go = true;
+			suns -= 3;
+			System.out.println("Suns are now at: " + suns);
 		    }
 		    else { go = false; }
 		}
@@ -248,78 +231,106 @@ public class Woo {
 	else{
 	    System.out.println("Insufficient suns.  Wait, impatient patriot.");
 	}
-	//randomly creates Zombies upon unoccupied spaces of the board
-	createZombie(board);
-	for(int i = 0; i < board.length; i++){
-	    for(int j = board.length - 2; j >= 0; j--){
-		//ah, this is a doozy.  First and foremost, Plants should be able to fire, so that is one of the positive conditions.  However, if a bullet passes through a plant, the spot on the board actually goes from class Plant to String, forcing the second portion
-		if((board[i][j] instanceof Plants) || 
-		   ((board[i][j] instanceof String) && (((String)board[i][j]).contains("P"))) ||
-		   (((String)board[i][j]).contains("S")) || 
-		   (((String)board[i][j]).contains("O")) ||
-		   (((String)board[i][j]).contains("C")) ||
-		   (((String)board[i][j]).contains("T")) ||
-		   (((String)board[i][j]).contains("W"))
-		   ){
-		    //it would be too easy if a Plant fired every time
-		    if((int)(Math.random() * 11.0) < plaBoard[j][i].freq){
-			//	shoot((Plants) board[i][j]);
-			shoot(plaBoard[j][i]);
-			//System.out.println(plaBoard[j][i].bullet);
+	    //labeling(board);
+
+
+
+
+	    // moveBullets(board);
+	    //chars(board);
+
+	    //randomly creates Zombies upon unoccupied spaces of the board
+	    createZombie(board);
+
+
+	    // System.out.println(r);
+
+	    for(int i = 0; i < board.length; i++){
+		for(int j = board.length - 2; j >= 0; j--){
+		    //ah, this is a doozy.  First and foremost, Plants should be able to fire, so that is one of the positive conditions.  However, if a bullet passes through a plant, the spot on the board actually goes from class Plant to String, forcing the second portion
+		    //thus, all Plants are "P" for now
+		    if((board[i][j] instanceof Plants) || 
+		       ((board[i][j] instanceof String) && (((String)board[i][j]).contains("P")))){
+			//it would be too easy if a Plant fired every time
+			if((int)(Math.random() * 11.0) < plaBoard[j][i].freq){
+			    //	shoot((Plants) board[i][j]);
+			    shoot(plaBoard[j][i]);
+			    //System.out.println(plaBoard[j][i].bullet);
+			}
 		    }
 		}
 	    }
-	}
-	
-	//to include /trackPos();
-	//hit takes all three boards, but for now only the first two are in use
-	move(board, zomBoard);
-	//when a bullet and Zombie are on the same space, damage is done to the Zombie, and, theoretically, the bullet should disappear
-	hit(board, zomBoard, plaBoard);
-	//this should allow Zombies to move each step, but they do not always
-	System.out.println( ArrayToString(board) );
-	cleanup(board);
+	    
 
-	//to include/System.out.println(ArrayToClass(board));
-	// System.out.println("Suns = " + suns);
+
+	    //to include /trackPos();
+	    //hit takes all three boards, but for now only the first two are in use
+	    move(board, zomBoard);
+	    //when a bullet and Zombie are on the same space, damage is done to the Zombie, and, theoretically, the bullet should disappear
+	    hit(board, zomBoard, plaBoard);
+	    //this should allow Zombies to move each step, but they do not always
+	    System.out.println( ArrayToString(board) );
+	    cleanup(board);
+
+	    //to include/System.out.println(ArrayToClass(board));
+	    // System.out.println("Suns = " + suns);
 	   
+	    
 
-	//gets rid of stray bullets and Zombies and assigns health/life/suns values accordingly
-	///	    cleanup(board);
+	    /*for(Plants p: plantList){
+		p.shoot();
+		}*/
 
-	//largely diagnostic but still good for the player to see
-	System.out.println("Suns: " + suns);
-	System.out.println("Life: " + life);
 
-	if(life <= 0){
-	    return;
-	}
 
-	System.out.println("Stop playing?\n(y/n)");
-	input = Keyboard.readWord();
-	if(input.equals("n")){
-	    keepGoing = true;
-	    go = true;
-	}
-	else{
-	    System.out.println("All characters other than n will be interpreted as a y for yes. Are you sure?");
-	    input = Keyboard.readWord();
-	    if(!(input.equals("n"))){
-		go = false; keepGoing = false;
+	    //gets rid of stray bullets and Zombies and assigns health/life/suns values accordingly
+	    ///	    cleanup(board);
+
+	    //largely diagnostic but still good for the player to see
+	    System.out.println("Suns: " + suns);
+            System.out.println("Life: " + life);
+
+	    if(life <= 0){
+		return;
 	    }
-	}
+
+	    System.out.println("Stop playing?\n(y/n)");
+	    input = Keyboard.readWord();
+	    if(input.equals("n")){
+		keepGoing = true;
+		go = true;
+	    }
+	    else{
+		System.out.println("All characters other than n will be interpreted as a y for yes. Are you sure?");
+		input = Keyboard.readWord();
+		if(!(input.equals("n"))){
+		    go = false; keepGoing = false;
+		}
+	    }
+
+	    /*System.out.println ( "Would you like to add a plant? \ny = yes \nn = no" );
+	    //boolean go;
+	    input = Keyboard.readWord();
+	    if ( input.equals("y") ) {
+		go = true;
+	    }
+	    else { go = false; }*/
     }
+
+    /*    public static void fitChars ( Object[][] arr){
+	if (
+	}*/
 
     /*
       void shoot (Plants c)
       this causes each Plant, or Plant-looking spot, to output a bullet
       since bullet is an instance variable, that will simply be placed on the board if the space in front of the plant is clear.
       you could also try using += instead of =; that would likely get rid of the need for that bulky conditional
-    */
+     */
     public void shoot ( Plants c ) {
 	String s = c.bullet;
 	if((board[ c.yCor ][ c.xCor + 1].equals(" ")) || (board[c.yCor][c.xCor + 1].equals(""))){
-	    //essentially if there is empty space ahead
+	//essentially if there is empty space ahead
 	    board[ c.yCor ][ c.xCor + 1 ] = s; 
 	}
     } 
@@ -328,7 +339,7 @@ public class Woo {
       void moveBullets (board)
       pre: the board, after Plants having shot, is laden with bullets
       post: all the bullets move one spot to the right without leaving the board
-    */
+     */
     public void moveBullets ( Object [][] arr ){
 	for ( int r = 0; r < arr.length; r++ ) {
 	    for ( int c = arr[r].length - 2; c > 0; c-- ) {
@@ -353,7 +364,7 @@ public class Woo {
       void createZombie(board)
       pre: the board has Plants and bullets, but Zombies are yet to be created
       post: Zombies are created and randomly dispersed throughout the rightmost 3 columns of the board
-    */
+     */
     public void createZombie(Object[][] arr){
 	//proceed determines whether the randomly-selected space is clear for a Zombie to be placed
 	boolean proceed = false;
@@ -363,7 +374,7 @@ public class Woo {
 	
 	/*
 	  ah, another hefty conditional.  In this case, the selected spot must first be of Class String rather than a pre-existing plant or zombie.  As well, it must not contain any relevant game characters
-	*/
+	 */
 	if((arr[y][x] instanceof String) && (!(((String)arr[y][x]).contains("-"))) && (!((String)arr[y][x]).contains("Z"))){
 	    //	    if(!(arr[y][x] instanceof Zombie)){
 	    if((Math.random() * 10.0) < 7){
@@ -389,6 +400,13 @@ public class Woo {
 	    proceed = false;
 	    
 	}
+	/*	else{
+	    if(!(arr[y + 1][x] instanceof Zombie)){
+		Zombie z = new Zombie("Z", 10, 10, 10, x, y);
+		arr[y + 1][x] = z;
+		zomBoard[x][y + 1] = z;
+	    }
+	    }*/
     }
 
     /*
@@ -397,7 +415,7 @@ public class Woo {
       basically, if a space on the board contains both a bullet ("-") and a zombie ("Z"), even though that space's class may still be a String, that is still considered a hit
       thus, using the spot's coordinates, the zombie's health is accessed in the zomBoard (zBoard), and altered accordingly, while the bullet is also supposed to vanish
       as well, the zombie could die, in which case it transforms into its sun value for a turn, before the value is added to the sun total
-    */
+     */
     public void hit(Object[][] bBoard, Zombie[][] zBoard, Plants[][] pBoard){
 	for(int y = 0; y < bBoard.length; y++){
 	    for(int x = 0; x < bBoard[y].length; x++){
@@ -417,22 +435,22 @@ public class Woo {
 		    //should remove the bullet, but this does not always work
 		    bBoard[y][x] = ((String)bBoard[y][x]).replace("-", "");
 		    if(zBoard[x][y].health <= 0){
-			zBoard[x][y].die();
-			bBoard[y][x] = "" + zBoard[x][y].reward;
-			System.out.println("A Zombie has died");
-			//strangely enough, this part works rather consistently, but with a one-turn delay
-			System.out.println("Your reward: " + bBoard[y][x] + " suns");
+		       zBoard[x][y].die();
+		       bBoard[y][x] = "" + zBoard[x][y].reward;
+		       System.out.println("A Zombie has died");
+		       //strangely enough, this part works rather consistently, but with a one-turn delay
+		       System.out.println("Your reward: " + bBoard[y][x] + " suns");
 		    }
 		}
 	    }
 	}
-    }
+     }
 
     /*
       void move(board, zomBoard)
       pre: the Zombies exist, but are stationary
       post: Zombies are moved 1 space to the left
-    */
+     */
     public static void move( Object [][] arr, Zombie[][] zArr ){
         for ( int r = 0; r < arr.length; r++ ) {
 	    //starts at 2 to avoid breaching the leftmost boundary
@@ -450,7 +468,7 @@ public class Woo {
 		    //this part is important
 		    /*
 		      the zombies must be also moved within the zomBoard to allow coordinates to still correspond were any bullets to hit while the zombie is moving
-		    */
+		     */
                     Zombie mock = zArr[j - 1][r];
                     zArr[j - 1][r] = zArr[j][r];
                     zArr[j][r] = mock;
@@ -464,9 +482,9 @@ public class Woo {
     /*
       void Cleanup(board)
       the first part removes any bullets left in the rightmost column, as they have no use
-      the second part should remove any zombies in the leftmost column, and also lower the player's life accordingly. 
+      the second part should remove any zombies in the leftmost column, and also lower the player's life accordingly.  This does not seem to work for now, but I may be wrong.
       the third part finds the remnants of any dead zombies on the board, which are shown by the zombie's value in suns (at the moment "10").  This part both removes these numbers from the board and also adds them to the suns total
-    */
+     */
     public void cleanup(Object[][] arr){
 	//all rows, only the final column
 	for(int i = 0; i < 9; i++){
@@ -509,7 +527,7 @@ public class Woo {
 		
 	String r = "==============================";
 	System.out.println(r);
-	System.out.println("\tWelcome to Plants vs Zombies!");
+	System.out.println("\tWelcome to PvZ!");
 	System.out.println(r);
 
 	System.out.println("Suns = " + suns);
@@ -525,6 +543,7 @@ public class Woo {
 	System.out.println("Now let's begin the game!");
 	
 	kelly.labeling(board);
+	//kelly.chars(board);
 
 	System.out.println(r);
 	
@@ -550,6 +569,13 @@ public class Woo {
 	}
 	while(keepGoing == true){
 	    kelly.turn();
+	    /*System.out.println("Stop playing?\n(y/n)");
+	    input = Keyboard.readWord();
+	    if(input.equals("n")){
+		go = true;
+	    }
+	    else{ go = false;}*/
+
 	    if(life <= 0){
 		keepGoing = false;
 		System.out.println("This game is over!");
