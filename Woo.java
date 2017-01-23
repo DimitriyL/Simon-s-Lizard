@@ -13,9 +13,9 @@ public class Woo {
     public static Zombie[][] zomBoard = new Zombie[9][9];
     public static Plants[][] plaBoard = new Plants[9][9];
     
-    public static String plantsDir = "------------------------------\n\t~Plants Directory~\n------------------------------\nP=\n\tPea Pod: 5 suns (10HP, 5ATK)\nS=\n\tShroom: 3 suns (10HP, 0ATK)\nO=\n\tPotato: 10 suns (25HP, 0ATK)\nC=\n\tCorn Cobbler: 8 suns (10HP, 7ATK)\nT=\n\tCactus: 8 suns (8HP, 8ATK)\nW=\n\tWaterm'Cannon: 15 suns (15HP, 20ATK))";
+    public static String plantsDir = "------------------------------\n\t~Plants Directory~\n------------------------------\nP=\n\tPea Pod: 5 suns (10HP, 5ATK)\nS=\n\tShroom: 3 suns (10HP, 0ATK)\nO=\n\tPotato: 10 suns (25HP, 4ATK)\nC=\n\tCorn Cobbler: 8 suns (10HP, 7ATK)\nT=\n\tCactus: 8 suns (8HP, 8ATK)\nW=\n\tWaterm'Cannon: 15 suns (15HP, 20ATK))";
     
-    //ublic static String plantsDir = "------------------------------\n\t~Plants Directory~\n------------------------------\nP=\n\tProper Plant: 3 suns, 5ATK\nThis is the only plant";
+    //public static String plantsDir = "------------------------------\n\t~Plants Directory~\n------------------------------\nP=\n\tProper Plant: 3 suns, 5ATK\nThis is the only plant";
     //public static int plantCount = 0;
     //suns are currency, used for predisposing a plant up the surface of the board
     public static int suns;
@@ -119,35 +119,35 @@ public class Woo {
 		    System.out.println("Suns are now at: " + suns);
 		}
 		else if ( type.equals("S") && suns > 2) {
-		    Plants s = new Plants("-", 5, x, y, "S" );
+		    Plants s = new Plants("-", 0, x, y, "S" );
 		    arr[y][x] = s;
 		    plaBoard[x][y] = s;
 		    suns -= 3;
 		    System.out.println("Suns are now at: " + suns);
 		}
 		else if ( type.equals("C") && suns > 7 ) {
-		    Plants c = new Plants("-", 5, x, y, "C" );
+		    Plants c = new Plants("-", 4, x, y, "C" );
 		    arr[y][x] = c;
 		    plaBoard[x][y] = c;
 		    suns -= 8;
 		    System.out.println("Suns are now at: " + suns);
 		}
 		else if ( type.equals("O") && suns > 9 ) {
-		    Plants o = new Plants("-", 5, x, y, "O" );
+		    Plants o = new Plants("-", 7, x, y, "O" );
 		    arr[y][x] = o;
 		    plaBoard[x][y] = o;
 		    suns -= 10;
 		    System.out.println("Suns are now at: " + suns);
 		}
 		else if ( type.equals("T") && suns > 7) {
-		    Plants t = new Plants("-", 5, x, y, "T" );
+		    Plants t = new Plants("-", 8, x, y, "T" );
 		    arr[y][x] = t;
 		    plaBoard[x][y] = t;
 		    suns -= 8;
 		    System.out.println("Suns are now at: " + suns);
 		}
 		else if ( type.equals("W") && suns > 14) {
-		    Plants w = new Plants("-", 5, x, y, "W" );
+		    Plants w = new Plants("-", 20, x, y, "W" );
 		    arr[y][x] = w;
 		    plaBoard[x][y] = w;
 		    suns -= 15;
@@ -227,8 +227,6 @@ public class Woo {
 	    //allows the user to add as many plants as they choose
 	    if ( input.equals("y") ) {
 		go = true;
-		//	suns -= 3;
-		//System.out.println("Suns are now at: " + suns);
 	    }
 	    else{
 		go = false; 
@@ -241,8 +239,6 @@ public class Woo {
 		    input = Keyboard.readWord();
 		    if ( input.equals("y") ) {
 			go = true;
-			//suns -= 3;
-			//System.out.println("Suns are now at: " + suns);
 		    }
 		    else { go = false; }
 		}
@@ -257,9 +253,14 @@ public class Woo {
 	for(int i = 0; i < board.length; i++){
 	    for(int j = board.length - 2; j >= 0; j--){
 		//ah, this is a doozy.  First and foremost, Plants should be able to fire, so that is one of the positive conditions.  However, if a bullet passes through a plant, the spot on the board actually goes from class Plant to String, forcing the second portion
-		//thus, all Plants are "P" for now
 		if((board[i][j] instanceof Plants) || 
-		   ((board[i][j] instanceof String) && (((String)board[i][j]).contains("P")))){
+		   ((board[i][j] instanceof String) && (((String)board[i][j]).contains("P"))) ||
+		   (((String)board[i][j]).contains("S")) || 
+		   (((String)board[i][j]).contains("O")) ||
+		   (((String)board[i][j]).contains("C")) ||
+		   (((String)board[i][j]).contains("T")) ||
+		   (((String)board[i][j]).contains("W"))
+		   ){
 		    //it would be too easy if a Plant fired every time
 		    if((int)(Math.random() * 11.0) < plaBoard[j][i].freq){
 			//	shoot((Plants) board[i][j]);
@@ -269,7 +270,7 @@ public class Woo {
 		}
 	    }
 	}
-	    
+	
 	//to include /trackPos();
 	//hit takes all three boards, but for now only the first two are in use
 	move(board, zomBoard);
@@ -282,13 +283,6 @@ public class Woo {
 	//to include/System.out.println(ArrayToClass(board));
 	// System.out.println("Suns = " + suns);
 	   
-	    
-
-	/*for(Plants p: plantList){
-	  p.shoot();
-	  }*/
-
-
 
 	//gets rid of stray bullets and Zombies and assigns health/life/suns values accordingly
 	///	    cleanup(board);
@@ -314,19 +308,7 @@ public class Woo {
 		go = false; keepGoing = false;
 	    }
 	}
-
-	/*System.out.println ( "Would you like to add a plant? \ny = yes \nn = no" );
-	//boolean go;
-	input = Keyboard.readWord();
-	if ( input.equals("y") ) {
-	go = true;
-	}
-	else { go = false; }*/
     }
-
-    /*    public static void fitChars ( Object[][] arr){
-	  if (
-	  }*/
 
     /*
       void shoot (Plants c)
@@ -407,13 +389,6 @@ public class Woo {
 	    proceed = false;
 	    
 	}
-	/*	else{
-		if(!(arr[y + 1][x] instanceof Zombie)){
-		Zombie z = new Zombie("Z", 10, 10, 10, x, y);
-		arr[y + 1][x] = z;
-		zomBoard[x][y + 1] = z;
-		}
-		}*/
     }
 
     /*
@@ -489,7 +464,7 @@ public class Woo {
     /*
       void Cleanup(board)
       the first part removes any bullets left in the rightmost column, as they have no use
-      the second part should remove any zombies in the leftmost column, and also lower the player's life accordingly.  This does not seem to work for now, but I may be wrong.
+      the second part should remove any zombies in the leftmost column, and also lower the player's life accordingly. 
       the third part finds the remnants of any dead zombies on the board, which are shown by the zombie's value in suns (at the moment "10").  This part both removes these numbers from the board and also adds them to the suns total
     */
     public void cleanup(Object[][] arr){
